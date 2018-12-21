@@ -1,0 +1,3 @@
+Configure miss: whether lstat accepts an empty string
+Configure miss: sqrt
+Configure miss: library containing locale_charset

@@ -1,1 +1,1 @@
---disable-freexl
+--disable-freexl CFLAGS="$CFLAGS -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H"

@@ -4,7 +4,7 @@
 #
 Name     : libspatialite
 Version  : 4.3.0a
-Release  : 1
+Release  : 2
 URL      : http://www.gaia-gis.it/gaia-sins/libspatialite-4.3.0a.tar.gz
 Source0  : http://www.gaia-gis.it/gaia-sins/libspatialite-4.3.0a.tar.gz
 Summary  : Spatial SQL database engine based on SQLite
@@ -27,6 +27,7 @@ Summary: dev components for the libspatialite package.
 Group: Development
 Requires: libspatialite-lib = %{version}-%{release}
 Provides: libspatialite-devel = %{version}-%{release}
+Requires: libspatialite = %{version}-%{release}
 
 %description dev
 dev components for the libspatialite package.
@@ -56,20 +57,25 @@ license components for the libspatialite package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1545365258
-%configure --disable-static --disable-freexl
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1564727532
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+%configure --disable-static --disable-freexl CFLAGS="$CFLAGS -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H"
 make  %{?_smp_mflags}
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1545365258
+export SOURCE_DATE_EPOCH=1564727532
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libspatialite
 cp COPYING %{buildroot}/usr/share/package-licenses/libspatialite/COPYING

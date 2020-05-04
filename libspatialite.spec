@@ -4,7 +4,7 @@
 #
 Name     : libspatialite
 Version  : 4.3.0a
-Release  : 2
+Release  : 3
 URL      : http://www.gaia-gis.it/gaia-sins/libspatialite-4.3.0a.tar.gz
 Source0  : http://www.gaia-gis.it/gaia-sins/libspatialite-4.3.0a.tar.gz
 Summary  : Spatial SQL database engine based on SQLite
@@ -52,17 +52,18 @@ license components for the libspatialite package.
 
 %prep
 %setup -q -n libspatialite-4.3.0a
+cd %{_builddir}/libspatialite-4.3.0a
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1564727532
+export SOURCE_DATE_EPOCH=1588614089
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static --disable-freexl CFLAGS="$CFLAGS -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H"
 make  %{?_smp_mflags}
@@ -75,11 +76,11 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1564727532
+export SOURCE_DATE_EPOCH=1588614089
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libspatialite
-cp COPYING %{buildroot}/usr/share/package-licenses/libspatialite/COPYING
-cp src/control_points/COPYING %{buildroot}/usr/share/package-licenses/libspatialite/src_control_points_COPYING
+cp %{_builddir}/libspatialite-4.3.0a/COPYING %{buildroot}/usr/share/package-licenses/libspatialite/fac7e08b00d48464e5cff0180701395569184413
+cp %{_builddir}/libspatialite-4.3.0a/src/control_points/COPYING %{buildroot}/usr/share/package-licenses/libspatialite/4cc77b90af91e615a64ae04893fdffa7939db84c
 %make_install
 
 %files
@@ -87,7 +88,7 @@ cp src/control_points/COPYING %{buildroot}/usr/share/package-licenses/libspatial
 
 %files dev
 %defattr(-,root,root,-)
-/usr/include/*.h
+/usr/include/spatialite.h
 /usr/include/spatialite/control_points.h
 /usr/include/spatialite/debug.h
 /usr/include/spatialite/gaiaaux.h
@@ -120,5 +121,5 @@ cp src/control_points/COPYING %{buildroot}/usr/share/package-licenses/libspatial
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/libspatialite/COPYING
-/usr/share/package-licenses/libspatialite/src_control_points_COPYING
+/usr/share/package-licenses/libspatialite/4cc77b90af91e615a64ae04893fdffa7939db84c
+/usr/share/package-licenses/libspatialite/fac7e08b00d48464e5cff0180701395569184413

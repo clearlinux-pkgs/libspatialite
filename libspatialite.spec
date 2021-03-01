@@ -4,7 +4,7 @@
 #
 Name     : libspatialite
 Version  : 5.0.0
-Release  : 4
+Release  : 5
 URL      : http://www.gaia-gis.it/gaia-sins/libspatialite-5.0.0.tar.gz
 Source0  : http://www.gaia-gis.it/gaia-sins/libspatialite-5.0.0.tar.gz
 Summary  : Spatial SQL database engine based on SQLite

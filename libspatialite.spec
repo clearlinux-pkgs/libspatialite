@@ -5,7 +5,7 @@
 #
 Name     : libspatialite
 Version  : 5.0.1
-Release  : 8
+Release  : 9
 URL      : https://www.gaia-gis.it/gaia-sins/libspatialite-5.0.1.tar.gz
 Source0  : https://www.gaia-gis.it/gaia-sins/libspatialite-5.0.1.tar.gz
 Summary  : Spatial SQL database engine based on SQLite
@@ -69,13 +69,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1684429076
+export SOURCE_DATE_EPOCH=1686948783
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
-%configure --disable-static --disable-freexl --disable-minizip CFLAGS="$CFLAGS -DACCEPT_USE_OF_DEPRECATED_PROJ_API_H"
+%configure --disable-static --disable-freexl \
+--disable-minizip
 make  %{?_smp_mflags}
 
 %check
@@ -86,7 +87,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1684429076
+export SOURCE_DATE_EPOCH=1686948783
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libspatialite
 cp %{_builddir}/libspatialite-%{version}/COPYING %{buildroot}/usr/share/package-licenses/libspatialite/fac7e08b00d48464e5cff0180701395569184413 || :

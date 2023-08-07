@@ -4,10 +4,10 @@
 # Using build pattern: configure
 #
 Name     : libspatialite
-Version  : 5.0.1
-Release  : 9
-URL      : https://www.gaia-gis.it/gaia-sins/libspatialite-5.0.1.tar.gz
-Source0  : https://www.gaia-gis.it/gaia-sins/libspatialite-5.0.1.tar.gz
+Version  : 5.1.0
+Release  : 10
+URL      : https://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-5.1.0.tar.gz
+Source0  : https://www.gaia-gis.it/gaia-sins/libspatialite-sources/libspatialite-5.1.0.tar.gz
 Summary  : Spatial SQL database engine based on SQLite
 Group    : Development/Tools
 License  : GPL-2.0 MPL-1.1
@@ -17,6 +17,7 @@ BuildRequires : buildreq-configure
 BuildRequires : geos-dev
 BuildRequires : pkgconfig(libxml-2.0)
 BuildRequires : pkgconfig(rttopo)
+BuildRequires : pkgconfig(sqlite3)
 BuildRequires : pkgconfig(zlib)
 BuildRequires : proj-dev
 BuildRequires : sqlite-autoconf-dev
@@ -61,15 +62,15 @@ license components for the libspatialite package.
 
 
 %prep
-%setup -q -n libspatialite-5.0.1
-cd %{_builddir}/libspatialite-5.0.1
+%setup -q -n libspatialite-5.1.0
+cd %{_builddir}/libspatialite-5.1.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1686948783
+export SOURCE_DATE_EPOCH=1691447055
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -87,7 +88,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1686948783
+export SOURCE_DATE_EPOCH=1691447055
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/libspatialite
 cp %{_builddir}/libspatialite-%{version}/COPYING %{buildroot}/usr/share/package-licenses/libspatialite/fac7e08b00d48464e5cff0180701395569184413 || :
@@ -134,10 +135,10 @@ cp %{_builddir}/libspatialite-%{version}/src/control_points/COPYING %{buildroot}
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/libspatialite.so.7
-/usr/lib64/libspatialite.so.7.1.2
-/usr/lib64/mod_spatialite.so.7
-/usr/lib64/mod_spatialite.so.7.1.0
+/usr/lib64/libspatialite.so.8
+/usr/lib64/libspatialite.so.8.1.0
+/usr/lib64/mod_spatialite.so.8
+/usr/lib64/mod_spatialite.so.8.1.0
 
 %files license
 %defattr(0644,root,root,0755)

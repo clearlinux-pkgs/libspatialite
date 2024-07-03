@@ -1,0 +1,33 @@
+From da7a82fd87e02f097d13e4de1f50e411bec8d844 Mon Sep 17 00:00:00 2001
+From: "Brett T. Warden" <brett.t.warden@intel.com>
+Date: Wed, 3 Jul 2024 10:52:30 -0700
+Subject: [PATCH] Remove deprecated xmlNanoHTTP calls
+
+libxml2 has deprecated the public NanoHTTP API, so don't call any of its
+functions.
+
+libspatialite ticket:
+https://www.gaia-gis.it/fossil/libspatialite/tktview?name=2b1697e601
+
+libxml2 release 2.13.0 notes:
+https://gitlab.gnome.org/GNOME/libxml2/-/releases/v2.13.0
+"nanohttp: Deprecate public API"
+---
+ src/wfs/wfs_in.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/wfs/wfs_in.c b/src/wfs/wfs_in.c
+index fe07a0d190fd..e749f2ca7e67 100644
+--- a/src/wfs/wfs_in.c
++++ b/src/wfs/wfs_in.c
+@@ -4637,7 +4637,6 @@ SPATIALITE_DECLARE void
+ reset_wfs_http_connection (void)
+ {
+ /* Resets the libxml2 "nano HTTP": useful when changing the HTTP_PROXY settings */
+-    xmlNanoHTTPCleanup ();
+ }
+ 
+ #else /* LIBXML2 isn't enabled */
+-- 
+2.45.2
+
